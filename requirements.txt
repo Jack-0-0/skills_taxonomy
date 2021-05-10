@@ -9,3 +9,7 @@ tqdm
 filelock
 typer
 sh
+scikit-learn
+sentence-transformers
+seaborn
+treelib
