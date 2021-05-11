@@ -10,3 +10,43 @@ clustering:
   affinity: "euclidean"
   linkage: "ward"
   sub_clustering_distances: [9, 7, 7, 7, 7, 7, 6, 7, 6]
+
+informative_words:
+  num_words: 20
+
+class_mapping:
+  class:
+    0: "service"
+    1: "production"
+    2: "science"
+    3: "operations and maintenance"
+    4: "healthcare and medicine"
+    5: "language"
+    6: "computer"
+    7: "safety and regulatory"
+    8: "art and design"
+  sub_class:
+    0.0: "education, social and support services"
+    0.1: "customer service, marketing, finance"
+    0.2: "business and management"
+    1.0: "manufacturing and construction"
+    1.1: "food and alcohol"
+    1.2: "fitting and removal"
+    2.0: "science and research"
+    2.1: "fish, environment and crop"
+    2.2: "animal"
+    3.0: "testing and quality"
+    3.1: "machine operation and design"
+    3.2: "maintenance"
+    4.0: "healthcare"
+    4.1: "medical specialty"
+    5.0: "general language"
+    5.1: "written language"
+    5.2: "oral language"
+    6.0: "general IT"
+    6.1: "software development"
+    7.0: "safety and waste management"
+    7.1: "regulatory and law"
+    7.2: "transport and vehichle"
+    8.0: "art"
+    8.1: "design"
