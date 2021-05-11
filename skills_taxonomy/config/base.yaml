@@ -1,0 +1,12 @@
+skills:
+  min_num_words: 2
+
+sentence_transformer:
+  model: "paraphrase-distilroberta-base-v1"
+
+clustering:
+  n_clusters: None
+  distance_threshold: 10
+  affinity: "euclidean"
+  linkage: "ward"
+  sub_clustering_distances: [9, 7, 7, 7, 7, 7, 6, 7, 6]
