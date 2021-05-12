@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 from skills_taxonomy import config
 
 
-def create_emebedding(skills):
+def create_embedding(skills):
     """Create embedding using sentence transformer
 
     Returns:
