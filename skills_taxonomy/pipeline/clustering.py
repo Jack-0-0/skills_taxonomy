@@ -1,4 +1,8 @@
-"""Functions to cluster the embedding
+"""Functions to cluster the embedding to find meaningful groups of skills.
+
+Agglomerative clustering is used to find skill classes and sub classes. The parameter distance_threshold influences the size of the clusters produced. A higher distance threshold results in fewer clusters.
+
+Firstly, agglomerative clustering is performed on the whole dataset to find high level skill classes. Then, agglomerative clustering is performed on each of these classes to create sub classes.
 """
 import numpy as np
 from skills_taxonomy import config
