@@ -5,7 +5,7 @@ sentence_transformer:
   model: "paraphrase-distilroberta-base-v1"
 
 clustering:
-  n_clusters: None
+  n_clusters:
   distance_threshold: 10
   affinity: "euclidean"
   linkage: "ward"
