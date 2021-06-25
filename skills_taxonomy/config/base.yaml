@@ -5,11 +5,11 @@ sentence_transformer:
   model: "paraphrase-distilroberta-base-v1"
 
 clustering:
-  n_clusters: None
+  n_clusters:
   distance_threshold: 10
   affinity: "euclidean"
   linkage: "ward"
-  sub_clustering_distances: [9, 7, 7, 7, 7, 7, 6, 7, 6]
+  sub_clustering_distances: [9, 9, 9, 8, 9, 7, 8, 7, 6]
 
 informative_words:
   num_words: 20
