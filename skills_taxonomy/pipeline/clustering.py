@@ -68,8 +68,8 @@ def full_sub_cluster_assignment(
         embedding (np.array): skill descriptions embedding
         cluster_assignment (np.array): [description]
         num_clusters (int): [description]
-        distances (list of ints, optional): linkage distance thresholds for each subcluster above which,
-                                        clusters will not be merged.
+        distances (list of ints, optional): linkage distance thresholds for each subcluster
+                                        above which, clusters will not be merged.
 
     Returns:
         (np.array): subcluster assignments for all skills
