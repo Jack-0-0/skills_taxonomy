@@ -10,7 +10,14 @@ from sklearn.cluster import AgglomerativeClustering
 
 
 def normalise_embedding(embedding):
-    """Normalise embedding"""
+    """Normalise embedding to unit length
+
+    Args:
+        embedding (array): embedding to normalise
+
+    Returns:
+        array: normalised embedding
+    """
     return embedding / np.linalg.norm(embedding, axis=1, keepdims=True)
 
 
@@ -24,7 +31,7 @@ def cluster(
     """Creates, fits and returns a agglomerative clustering model
 
     Args:
-        embedding (np.array): skill descriptions embedding
+        embedding (array): skills embedding
         n_clusters (int or None, optional): number of clusters to find.
         distance_threshold (int, optional): linkage distance threshold above which,
                                         clusters will not be merged.
@@ -41,18 +48,43 @@ def cluster(
 
 
 def find_indices(cluster_assignment, class_id):
-    """Find class indices"""
+    """Find class indices
+
+    Args:
+        cluster_assignment (array): cluster assignments after clustering
+        class_id (str): class identifier
+
+    Returns:
+        array: indices of skills that have cluster_assignment matching class_id
+    """
     indices = np.argwhere(cluster_assignment == class_id)
     return np.squeeze(indices)
 
 
 def find_sub_embeddings(embedding, indices):
-    """Find embeddings for class"""
+    """Find sub embeddings for class
+
+    Args:
+        embedding (array): skills embedding
+        indices (array): indices of skills to select
+
+    Returns:
+        array: sub emebedding containing skills that match provided indices
+    """
     return np.asarray([embedding[i] for i in indices])
 
 
 def sub_cluster_assignment(sub_clustering_model, class_id):
-    """Assign sub clusters"""
+    """Assign sub clusters
+
+    Args:
+        sub_clustering_model (AgglomerativeClustering):  model that has been fit on sub cluster
+        class_id (str)): class identifier
+
+    Returns:
+        array: sub cluster assignments, example: if assigned to class 1 and subclass 2,
+            it would have sub cluster assignment of 1.2
+    """
     return np.asarray([(class_id + c / 10) for c in sub_clustering_model.labels_])
 
 
@@ -65,14 +97,14 @@ def full_sub_cluster_assignment(
     """Assign subclusters to all skills
 
     Args:
-        embedding (np.array): skill descriptions embedding
-        cluster_assignment (np.array): [description]
-        num_clusters (int): [description]
+        embedding (array): skill descriptions embedding
+        cluster_assignment (array): clusters assigned to skills
+        num_clusters (int): total number of clusters
         distances (list of ints, optional): linkage distance thresholds for each subcluster
                                         above which, clusters will not be merged.
 
     Returns:
-        (np.array): subcluster assignments for all skills
+        array: subcluster assignments for all skills
     """
     full_sub_cluster_assignments = np.empty(shape=(len(embedding),))
     for class_id in range(num_clusters):

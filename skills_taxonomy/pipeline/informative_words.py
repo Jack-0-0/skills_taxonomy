@@ -31,8 +31,8 @@ def c_tf_idf(documents, doc_length, ngram_range=(1, 1)):
                         Defaults to (1, 1) i.e unigrams.
 
     Returns:
-        tf_idf (np.array): matrix of tf_idf values
-        count (CountVectorizer): CountVectorizer which has been fit to documents
+        array: matrix of tf_idf values
+        CountVectorizer: CountVectorizer which has been fit to documents
     """
     count = CountVectorizer(ngram_range=ngram_range, stop_words="english").fit(
         documents
@@ -50,13 +50,13 @@ def extract_top_n_words_per_topic(tf_idf, count, classes, n=20):
     """Extract the top N words for each topic
 
     Args:
-        tf_idf (np.array): matrix of tf_idf values
+        tf_idf (array): matrix of tf_idf values
         count (CountVectorizer): CountVectorizer which has been fit to documents
         classes (list of ints): list of class ids
         n (int): number of most informative words to find, defaults to 20
 
     Returns:
-        top_n_words (dict): top N words for each topic
+        dict: top N words for each topic
     """
     words = count.get_feature_names()
     tf_idf_transposed = tf_idf.T
@@ -76,7 +76,7 @@ def view_top_n_words(skills, class_level):
         class_level (str): what class level to use ('class_id' or 'subclass_id')
 
     Returns:
-        top_n_words (dict): top N words for each class or subclass
+        dict: top N words for each class or subclass
     """
     skills_classid = skills[["description", class_level]]
     skills_classid["skill_id"] = range(len(skills_classid))
