@@ -1,4 +1,3 @@
-# File: pipeline/preprocessing.py
 """Preprocessing of skills file
 """
 
@@ -10,7 +9,7 @@ def preprocess_skills():
     containing two or fewer words and dropping unused columns
 
     Returns:
-        skills: preprocessed skills dataframe
+        df: processed skills
     """
     skills = get_skills()
     skills["n_words_desc"] = skills["description"].apply(lambda x: len(x.split()))

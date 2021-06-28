@@ -1,4 +1,3 @@
-# File: getters/esco_skills.py
 """Data getters for the esco skills data.
 
 Data source: https://ec.europa.eu/esco/portal
@@ -11,6 +10,6 @@ def get_skills() -> pd.DataFrame:
     """Load esco skills.
 
     Returns:
-        dataframe of esco skills
+        df: dataframe of esco skills
     """
     return pd.read_csv(f"{PROJECT_DIR}/inputs/data/skills_en.csv")
