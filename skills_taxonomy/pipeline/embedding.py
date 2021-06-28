@@ -1,14 +1,9 @@
-# File: pipeline/embedding.py
 """Functions to create, load and save skills embedding
 """
-
 from sentence_transformers import SentenceTransformer
-from skills_taxonomy import config
 import pickle
-import logging
-from skills_taxonomy import PROJECT_DIR
-
-logger = logging.getLogger(__name__)
+from skills_taxonomy import config, logger, PROJECT_DIR
+from skills_taxonomy.utils.dir_management import make_dir_if_not_exist
 
 
 def create_embedding(skills):
@@ -23,17 +18,19 @@ def create_embedding(skills):
     return embedding
 
 
-def save_embedding(embedding):
+def save_embedding(embedding, save_path=PROJECT_DIR / "outputs/models/embedding.pkl"):
     """Save embedding as pickle file
 
     Args:
         embedding: skills embedding to be saved as pickle file
+        save_path: path to save embedding
     """
-    with open(f"{PROJECT_DIR}/outputs/models/embedding.pkl", "wb") as out:
+    make_dir_if_not_exist(save_path.parent)
+    with open(save_path, "wb") as out:
         pickle.dump(embedding, out)
 
 
-def load_embedding(path=f"{PROJECT_DIR}/outputs/models/embedding.pkl"):
+def load_embedding(path=PROJECT_DIR / "outputs/models/embedding.pkl"):
     """Load embedding from pickle file
 
     Args:
@@ -48,4 +45,4 @@ def load_embedding(path=f"{PROJECT_DIR}/outputs/models/embedding.pkl"):
         return embedding
 
     except FileNotFoundError:
-        logger.info(f"There is no embedding to load at {path}")
+        logger.error(f"There is no embedding to load at {path}")
