@@ -13,10 +13,9 @@ The top 3 functions below are from this
 implementation of class-TD-IDF https://github.com/MaartenGr/cTFIDF
 """
 from sklearn.feature_extraction.text import CountVectorizer
-from skills_taxonomy.utils.dir_management import make_dir_if_not_exist
-import json
 import numpy as np
 from skills_taxonomy import PROJECT_DIR
+from skills_taxonomy.utils.json_management import save_json
 
 
 def c_tf_idf(documents, doc_length, ngram_range=(1, 1)):
@@ -91,25 +90,6 @@ def view_top_n_words(skills, class_level):
     return top_n_words
 
 
-def save_json(save_dir, skills, file_name, class_level):
-    """Save dictionary of top most informative words as json
-
-    Args:
-        save_dir (str): path to directory to save json
-        skills (df): dataframe of skills with descriptions
-        file_name (str): file name to save json
-        class_level (str): what class level to use ('class_id' or 'subclass_id')
-    """
-    print(f"{save_dir}{file_name}")
-    with open(f"{save_dir}{file_name}", "w") as fp:
-        json.dump(
-            view_top_n_words(skills, class_level),
-            fp,
-            sort_keys=True,
-            indent=4,
-        )
-
-
 def save_informative_words(
     skills, save_dir=f"{PROJECT_DIR}/outputs/most_informative_words/"
 ):
@@ -120,13 +100,15 @@ def save_informative_words(
         save_dir (str): path to directory to save json,
             defaults to f"{PROJECT_DIR}/outputs/most_informative_words/".
     """
-    make_dir_if_not_exist(save_dir)
     # save most informative words for classes
-    save_json(save_dir, skills, file_name="class.json", class_level="class_id")
+    save_json(
+        save_dir,
+        file_name="class.json",
+        json_to_save=view_top_n_words(skills, class_level="class_id"),
+    )
     # save most informative words for subclasses
     save_json(
         save_dir,
-        skills,
         file_name="subclass.json",
-        class_level="subclass_id",
+        json_to_save=view_top_n_words(skills, class_level="subclass_id"),
     )
