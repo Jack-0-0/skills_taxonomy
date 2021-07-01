@@ -1,6 +1,5 @@
 """Preprocessing of skills file
 """
-
 from skills_taxonomy.getters.esco_skills import get_skills
 
 
@@ -12,8 +11,11 @@ def preprocess_skills():
         df: processed skills
     """
     skills = get_skills()
-    skills["n_words_desc"] = skills["description"].apply(lambda x: len(x.split()))
-    cond = skills["n_words_desc"] > 2
-    skills = skills[cond]
-    skills = skills.reset_index(drop=True)
-    return skills[["preferredLabel", "altLabels", "description"]]
+    return (
+        skills.assign(
+            n_words_desc=skills["description"].apply(lambda x: len(x.split()))
+        )
+        .query("n_words_desc > 2")
+        .reset_index(drop=True)
+        .loc[:, ["preferredLabel", "altLabels", "description"]]
+    )
