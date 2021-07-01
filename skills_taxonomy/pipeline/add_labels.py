@@ -35,13 +35,13 @@ def add_labels(skills):
         skills,
         label="class_lbl",
         id="class_id",
-        lookup=load_json(f"{PROJECT_DIR}/outputs/named_clusters/named_classes_x.json"),
+        lookup=load_json(f"{PROJECT_DIR}/outputs/named_classes/named_classes_x.json"),
     )
     return map_lbls_id(
         skills,
         label="subclass_lbl",
         id="subclass_id",
         lookup=load_json(
-            f"{PROJECT_DIR}/outputs/named_clusters/named_subclasses_x.json"
+            f"{PROJECT_DIR}/outputs/named_classes/named_subclasses_x.json"
         ),
     )
