@@ -44,7 +44,7 @@ def save_named_clusters(save_dir=f"{PROJECT_DIR}/outputs/named_classes/"):
     most_informative_words/subclass.json and save json file.
 
     Args:
-        save_dir ([type], optional): [description]. Defaults to f"{PROJECT_DIR}/outputs/named_classes/".
+        save_dir (str): save directory, defaults to f"{PROJECT_DIR}/outputs/named_classes/"
     """
     save_json(
         save_dir,
