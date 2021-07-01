@@ -117,3 +117,26 @@ def full_sub_cluster_assignment(
         for i, a in zip(indices, sub_cluster_assignments):
             full_sub_cluster_assignments[i] = a
     return full_sub_cluster_assignments
+
+
+def cluster_add_ids(skills, embedding):
+    """Cluster the skills descriptions and add
+    a column for their cluster ids
+
+    Args:
+        skills (df): dataframe of skills with descriptions
+        embedding (array): skill descriptions embedding
+
+    Returns:
+        df: dataframe of skills with descriptions with
+        addition of columns for class and subclass ids
+    """
+    embedding = normalise_embedding(embedding)
+    clustering_model = cluster(embedding)
+    cluster_assignments = clustering_model.labels_
+    full_sub_cluster_assignments = full_sub_cluster_assignment(
+        embedding, cluster_assignments, clustering_model.n_clusters_
+    )
+    return skills.assign(
+        class_id=cluster_assignments, subclass_id=full_sub_cluster_assignments
+    )
