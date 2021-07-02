@@ -15,6 +15,12 @@ def load_json(json_path):
         return json.load(file)
 
 
+def convert_dict_key_type(dict, type):
+    """Convert keys in dictionary to ints
+    (loading json loads keys as strs)"""
+    return {type(k): v for k, v in dict.items()}
+
+
 def save_json(save_dir, file_name, json_to_save):
     """Save dictionary as json
 
